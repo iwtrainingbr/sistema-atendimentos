@@ -1,0 +1,13 @@
+<?php
+
+declare(strict_types=1);
+
+namespace App\Controller;
+
+class ErrorController extends AbstractController
+{
+    public function notFoundAction(): void
+    {
+        $this->render('error/404');
+    }
+}

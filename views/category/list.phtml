@@ -1,1 +1,36 @@
-<h1>Listar Categorias</h1>
+<div class="row mt-3">
+    <div class="col-md-12">
+        <div class="card">
+            <div class="card-body">
+
+                <h1>Listar Categorias</h1>
+
+                <table class="table table-hover table-striped">
+                    <thead class="thead-dark">
+                        <tr>
+                            <th>ID</th>
+                            <th>Nome</th>
+                            <th>Descrição</th>
+                            <th>Ações</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <?php
+                            /** @var \App\Entity\Category $category */
+                            foreach ($categories as $category) {
+                                echo "
+                                    <tr>
+                                        <td>{$category->getId()}</td>
+                                        <td>{$category->getName()}</td>
+                                        <td>{$category->getDescription()}</td>
+                                        <td>...</td>
+                                    </tr>
+                                ";
+                            }
+                        ?>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
