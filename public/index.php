@@ -1,21 +1,24 @@
 <?php
 
-include_once '../src/Controller/AbstractController.php';
-include_once '../src/Controller/IndexController.php';
-include_once '../src/Controller/CategoryController.php';
+use App\Controller\ErrorController;
+
+ini_set('display_errors', 1);
+
+include_once '../vendor/autoload.php';
+
+include '../config/database.php';
 
 $url = $_SERVER['REQUEST_URI'];
 
 $routes = include '../config/routes.php';
 
 if (!isset($routes[$url])) {
- die('<h1>Página não encontrada.</h1>');
+ (new ErrorController)->notFoundAction();
+ exit;
 }
 
-$parts = explode(':', $routes[$url]);
-
-$class = $parts[0];
-$method = $parts[1];
+$class = $routes[$url]['controller'];
+$method = $routes[$url]['action'];
 
 (new $class)->$method();
 
