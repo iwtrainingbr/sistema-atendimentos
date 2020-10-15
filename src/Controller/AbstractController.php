@@ -15,4 +15,11 @@ abstract class AbstractController
         include "../views/{$viewName}.phtml";
         include '../views/_partials/footer.phtml';
     }
+
+    public function renderFileToPdf(string $viewName, array $data = [])
+    {
+        extract($data);
+
+        return include "../views/{$viewName}.phtml";
+    }
 }

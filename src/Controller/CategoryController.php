@@ -8,6 +8,8 @@ use App\Adapter\Connection;
 use App\Entity\Category;
 use Doctrine\ORM\EntityManager;
 use Doctrine\Persistence\ObjectRepository;
+use Dompdf\Dompdf;
+use Dompdf\Options;
 
 class CategoryController extends AbstractController
 {
@@ -72,5 +74,25 @@ class CategoryController extends AbstractController
         $this->entityManager->flush();
 
         header('location: /categorias');
+    }
+
+    public function pdfAction(): void
+    {
+        $today = new \DateTime();
+
+        $file = $this->renderFileToPdf('category/pdf', [
+            'categories' => $this->repository->findAll(),
+        ]);
+
+        $options = new Options();
+        $options->setIsRemoteEnabled(true);
+
+        $dompdf = new Dompdf();
+        $dompdf->loadHtml($file);
+        $dompdf->setOptions($options);
+        $dompdf->render();
+        $dompdf->stream('Relatorio-Categorias-'.$today->format('dmY').'.pdf', [
+            'Attachment' => false,
+        ]);
     }
 }
