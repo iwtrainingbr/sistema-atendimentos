@@ -1,1 +1,21 @@
-<h1>Editar Categoria</h1>
+<div class="row mt-3">
+    <div class="col-md-6">
+        <div class="card">
+            <div class="card-body">
+                <h1>Editar Categoria</h1>
+
+                <form action="" method="post">
+                    <label for="name">Nome</label>
+                    <input value="<?=$category->getName()?>" id="name" name="name" type="text" required placeholder="Nome da Categoria" class="form-control">
+                    <br>
+
+                    <label for="description">Descrição</label>
+                    <textarea placeholder="Pra que tipos de atendimentos?" required name="description" id="description" class="form-control"><?=$category->getDescription()?></textarea>
+                    <br>
+
+                    <button class="btn btn-block btn-primary">PRONTO</button>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>

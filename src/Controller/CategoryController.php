@@ -44,8 +44,33 @@ class CategoryController extends AbstractController
         ]);
     }
 
-  public function editAction(): void
-  {
-    $this->render('category/edit');
-  }
+    public function editAction(): void
+    {
+        $category = $this->repository->find($_GET['id']);
+
+        if ($_POST) {
+            $category->setName($_POST['name']);
+            $category->setDescription($_POST['description']);
+
+            $this->entityManager->persist($category);
+            $this->entityManager->flush();
+
+            header('location: /categorias');
+        }
+
+        $this->render('category/edit', [
+            'category' => $category,
+        ]);
+    }
+
+    public function removeAction(): void
+    {
+        $id = $_GET['id'];
+        $category = $this->repository->find($id);
+
+        $this->entityManager->remove($category);
+        $this->entityManager->flush();
+
+        header('location: /categorias');
+    }
 }

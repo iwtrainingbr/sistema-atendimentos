@@ -12,7 +12,9 @@ function mountRoute(string $controllerName, string $actionName): array
 }
 
 return [
-  '/' => mountRoute(IndexController::class, 'homeAction'),
-  '/categorias' => mountRoute(CategoryController::class, 'listAction'),
-  '/nova-categoria' => mountRoute(CategoryController::class, 'addAction'),
+    '/' => mountRoute(IndexController::class, 'homeAction'),
+    '/categorias' => mountRoute(CategoryController::class, 'listAction'),
+    '/nova-categoria' => mountRoute(CategoryController::class, 'addAction'),
+    '/categoria/excluir' => mountRoute(CategoryController::class, 'removeAction'),
+    '/categoria/editar' => mountRoute(CategoryController::class, 'editAction'),
 ];

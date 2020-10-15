@@ -8,7 +8,7 @@ include_once '../vendor/autoload.php';
 
 include '../config/database.php';
 
-$url = $_SERVER['REQUEST_URI'];
+$url = explode('?', $_SERVER['REQUEST_URI'])[0];
 
 $routes = include '../config/routes.php';
 

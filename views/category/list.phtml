@@ -23,7 +23,10 @@
                                         <td>{$category->getId()}</td>
                                         <td>{$category->getName()}</td>
                                         <td>{$category->getDescription()}</td>
-                                        <td>...</td>
+                                        <td>
+                                            <button onclick='confirmRemove({$category->getId()})' class='btn btn-danger'>Excluir</button>
+                                            <a href='/categoria/editar?id={$category->getId()}' class='btn btn-warning'>Editar</a>
+                                        </td>
                                     </tr>
                                 ";
                             }
@@ -34,3 +37,11 @@
         </div>
     </div>
 </div>
+
+<script>
+    function confirmRemove(id) {
+        if (confirm('Você realmente deseja excluir a categoria?')) {
+            location.href='/categoria/excluir?id='+id;
+        }
+    }
+</script>
