@@ -17,4 +17,5 @@ return [
     '/nova-categoria' => mountRoute(CategoryController::class, 'addAction'),
     '/categoria/excluir' => mountRoute(CategoryController::class, 'removeAction'),
     '/categoria/editar' => mountRoute(CategoryController::class, 'editAction'),
+    '/categorias/pdf' => mountRoute(CategoryController::class, 'pdfAction'),
 ];
