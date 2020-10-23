@@ -2,6 +2,7 @@
 
 use App\Controller\CategoryController;
 use App\Controller\IndexController;
+use App\Controller\SchedulingController;
 
 function mountRoute(string $controllerName, string $actionName): array
 {
@@ -18,4 +19,8 @@ return [
     '/categoria/excluir' => mountRoute(CategoryController::class, 'removeAction'),
     '/categoria/editar' => mountRoute(CategoryController::class, 'editAction'),
     '/categorias/pdf' => mountRoute(CategoryController::class, 'pdfAction'),
+    '/agendamentos' => mountRoute(SchedulingController::class, 'listAction'),
+    '/agendamentos/novo' => mountRoute(SchedulingController::class, 'addAction'),
+    '/agendamentos/finalizar' => mountRoute(SchedulingController::class, 'finishAction'),
+    '/agendamentos/cancelar' => mountRoute(SchedulingController::class, 'cancelAction'),
 ];
