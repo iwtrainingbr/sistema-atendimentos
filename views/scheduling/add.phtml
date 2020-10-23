@@ -1,0 +1,57 @@
+<div class="row mt-3">
+    <div class="col-md-6">
+        <div class="card">
+            <div class="card-body">
+                <h1>Novo Agendamento</h1>
+
+                <form action="" method="post">
+                    <label for="category">Categoria</label>
+                    <select required name="category" id="category" class="form-control">
+                        <option value="" selected> -- Selecione -- </option>
+                        <?php
+                            foreach ($categories as $category) {
+                                echo "<option value='{$category->getId()}'>
+                                    {$category->getName()}
+                                </option>";
+                            }
+                        ?>
+                    </select>
+                    <br>
+
+                    <label for="name">Seu nome completo</label>
+                    <input id="name" name="name" type="text" required placeholder="Nome da pessoa a ser atendida" class="form-control">
+                    <br>
+
+                    <label for="description">Descrição</label>
+                    <textarea placeholder="Fale mais sobre o atendimento" required name="description" id="description" class="form-control"></textarea>
+                    <br>
+
+                    <label for="date">Data</label>
+                    <select required name="date" id="date" class="form-control">
+                        <option value="" selected> -- Selecione -- </option>
+                        <?php
+                        foreach ($dates as $date) {
+                            echo "<option>{$date}</option>";
+                        }
+                        ?>
+                    </select>
+                    <br>
+
+                    <label for="time">Hora</label>
+                    <select required name="time" id="time" class="form-control">
+                        <option value="" selected> -- Selecione -- </option>
+                        <?php
+                        foreach ($times as $time) {
+                            echo "<option>{$time}</option>";
+                        }
+                        ?>
+                    </select>
+                    <br>
+
+
+                    <button class="btn btn-block btn-primary">PRONTO</button>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>

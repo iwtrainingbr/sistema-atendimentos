@@ -1,0 +1,73 @@
+<div class="row mt-3">
+    <div class="col-md-12">
+        <div class="card">
+            <div class="card-body">
+
+                <h1>Listar Agendamentos</h1>
+
+                <div class="text-right">
+                    <a href="/agendamentos/novo" class="btn btn-outline-primary">Novo Agendamento</a>
+                    <a href="/agendamentos/pdf" class="btn btn-outline-secondary">Gerar PDF</a>
+                </div>
+
+                <table class="table table-hover table-striped mt-3">
+                    <thead class="thead-dark">
+                        <tr>
+                            <th>ID</th>
+                            <th>Categoria</th>
+                            <th>Data e Hora</th>
+                            <th>Cliente</th>
+                            <th>Status</th>
+                            <th>Criado em</th>
+                            <th>Ações</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                    <?php
+                        $colors = [
+                            \App\Entity\Scheduling::STATUS_WAITING => 'secondary',
+                            \App\Entity\Scheduling::STATUS_CANCELED => 'danger',
+                            \App\Entity\Scheduling::STATUS_FINISHED => 'success',
+                        ];
+
+                        /** @var \App\Entity\Scheduling $item */
+                        foreach ($scheduling as $item) {
+                            $statusColor = $colors[$item->getStatus()];
+
+                            $buttonToFinish = "<a href='/agendamentos/finalizar?id={$item->getId()}' class='btn btn-outline-success'>Finalizar</a>";
+                            $buttonToCancel = "<a href='/agendamentos/cancelar?id={$item->getId()}' class='btn btn-outline-danger'>Cancelar</a>";
+
+                            echo "
+                                <tr>
+                                    <td>{$item->getId()}</td>
+                                    <td>{$item->getCategory()->getName()}</td>
+                                    <td>{$item->getDatetime()->format('d/m/Y H:i')}</td>
+                                    <td>{$item->getCustomer()}</td>
+                                    <td>
+                                        <span class='badge badge-{$statusColor}'>
+                                            {$item->getStatus()}
+                                        </span>
+                                    </td>
+                                    <td>{$item->getCreatedAt()->format('d/m/Y H:i')}</td>
+                                    <td>
+                                        {$buttonToFinish}
+                                        {$buttonToCancel}
+                                    </td>
+                                </tr>
+                            ";
+                        }
+                    ?>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+    function confirmRemove(id) {
+        if (confirm('Você realmente deseja excluir o agendamento?')) {
+            location.href='/agendamentos/excluir?id='+id;
+        }
+    }
+</script>
