@@ -1,0 +1,64 @@
+<div class="jumbotron mt-5">
+    <h1>Acompanhamento de Agendamento</h1>
+</div>
+
+<div class="mt-5 card">
+    <div class="card-body">
+
+        <div class="mb-3">
+            <a href="/">Voltar</a>
+        </div>
+
+        <form>
+            <div class="row">
+                <div class="col-md-10">
+                    <input type="text" name="number" placeholder="Número do Protocolo" class="form-control">
+                </div>
+
+                <div class="col-md-2">
+                    <button class="btn btn-primary">Pesquisar</button>
+                </div>
+            </div>
+        </form>
+
+        <hr>
+
+        <?php
+            /** @var \App\Entity\Scheduling $details */
+            if (isset($details)) {
+                echo "
+                    <table class='table table-hover table-striped'>
+                        <tr>
+                            <th>Protocolo</th>
+                            <td>{$details->getId()}-{$details->getCreatedAt()->format('Ymd')}</td>
+                        </tr>
+                        <tr>
+                            <th>Categoria</th>
+                            <td>{$details->getCategory()->getName()}</td>
+                        </tr>
+                        <tr>
+                            <th>Nome</th>
+                            <td>{$details->getCustomer()}</td>
+                        </tr>
+                        <tr>
+                            <th>Status</th>
+                            <td>{$details->getStatus()}</td>
+                        </tr>
+                        <tr>
+                            <th>Descrição</th>
+                            <td>{$details->getDescription()}</td>
+                        </tr>
+                        <tr>
+                            <th>Criado em</th>
+                            <td>{$details->getCreatedAt()->format('d/m/Y H:i:s')}</td>
+                        </tr>
+                        <tr>
+                            <th>Agendado para</th>
+                            <td>{$details->getDatetime()->format('d/m/Y H:i:s')}</td>
+                        </tr>
+                    </table>
+                ";
+            }
+        ?>
+    </div>
+</div>

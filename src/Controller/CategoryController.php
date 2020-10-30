@@ -6,6 +6,7 @@ namespace App\Controller;
 
 use App\Adapter\Connection;
 use App\Entity\Category;
+use App\Security\Security;
 use Doctrine\ORM\EntityManager;
 use Doctrine\Persistence\ObjectRepository;
 use Dompdf\Dompdf;
@@ -24,6 +25,8 @@ class CategoryController extends AbstractController
 
     public function addAction(): void
     {
+        Security::checkPermission();
+
         if ($_POST) {
             $category = new Category();
             $category->setName($_POST['name']);
@@ -41,6 +44,8 @@ class CategoryController extends AbstractController
 
     public function listAction(): void
     {
+        Security::checkPermission();
+
         $this->render('category/list', [
             'categories' => $this->repository->findAll(),
         ]);
@@ -48,6 +53,8 @@ class CategoryController extends AbstractController
 
     public function editAction(): void
     {
+        Security::checkPermission();
+
         $category = $this->repository->find($_GET['id']);
 
         if ($_POST) {
@@ -67,6 +74,8 @@ class CategoryController extends AbstractController
 
     public function removeAction(): void
     {
+        Security::checkPermission();
+
         $id = $_GET['id'];
         $category = $this->repository->find($id);
 
@@ -78,6 +87,8 @@ class CategoryController extends AbstractController
 
     public function pdfAction(): void
     {
+        Security::checkPermission();
+
         $today = new \DateTime();
 
         $file = $this->renderFileToPdf('category/pdf', [

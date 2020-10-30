@@ -1,1 +1,22 @@
-<h1>Página Inicial</h1>
+<?php
+if (isset($_GET['error'])) {
+    echo "
+        <div class='alert alert-danger'>
+        {$_GET['error']}
+        </div>
+    ";
+}
+?>
+
+<div class="jumbotron mt-5">
+    <h1>Sistema de Atendimentos</h1>
+</div>
+
+<div>
+    <a href="/agendamentos/novo" class="btn btn-outline-primary">Novo Agendamento</a>
+    <a href="/agendamentos/detalhes" class="btn btn-outline-info">Acompanhar meu agendamento</a>
+</div>
+
+<div class="mt-5">
+    <a href="/login" class="btn btn-link">Area do Admin</a>
+</div>
