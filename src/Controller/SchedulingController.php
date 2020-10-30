@@ -7,6 +7,7 @@ namespace App\Controller;
 use App\Adapter\Connection;
 use App\Entity\Category;
 use App\Entity\Scheduling;
+use App\Security\Security;
 use Doctrine\ORM\EntityManager;
 use Doctrine\Persistence\ObjectRepository;
 
@@ -51,6 +52,8 @@ class SchedulingController extends AbstractController
 
     public function listAction(): void
     {
+        Security::checkPermission();
+
         $this->render('scheduling/list', [
             'scheduling' => $this->schedulingRepository->findAll(),
         ]);
@@ -74,6 +77,12 @@ class SchedulingController extends AbstractController
 
             $this->entityManager->persist($scheduling);
             $this->entityManager->flush();
+
+            if (!Security::isLogged()) {
+                $number = $scheduling->getId().'-'.$scheduling->getCreatedAt()->format('Ymd');
+                header('location: /agendamentos/detalhes?number='.$number);
+                return;
+            }
 
             header('location: /agendamentos');
             return;
@@ -101,6 +110,27 @@ class SchedulingController extends AbstractController
             'categories' => $this->categoryRepository->findAll(),
             'times' => $times,
             'dates' => $dates,
+        ]);
+    }
+
+    public function detailsAction(): void
+    {
+        if (!isset($_GET['number'])) {
+            $this->render('scheduling/details');
+            return;
+        }
+
+        $number = explode('-', $_GET['number']);
+
+        $details = $this->schedulingRepository->find($number[0]);
+
+        if ($details->getCreatedAt()->format('Ymd') !== $number[1]) {
+            header('location: /agendamentos/detalhes?error=Agendamento não encontrado');
+            return;
+        }
+
+        $this->render('scheduling/details', [
+            'details' => $details,
         ]);
     }
 }

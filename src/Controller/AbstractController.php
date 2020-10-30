@@ -4,6 +4,8 @@ declare(strict_types=1);
 
 namespace App\Controller;
 
+use App\Security\Security;
+
 abstract class AbstractController
 {
     public function render(string $viewName, array $data = []): void
@@ -11,7 +13,11 @@ abstract class AbstractController
         extract($data);
 
         include '../views/_partials/head.phtml';
-        include '../views/_partials/navbar.phtml';
+
+        if (Security::isLogged()) {
+            include '../views/_partials/navbar.phtml';
+        }
+
         include "../views/{$viewName}.phtml";
         include '../views/_partials/footer.phtml';
     }

@@ -46,6 +46,7 @@ class User
         $this->name = $name;
         $this->email = $email;
         $this->password = $password;
+        $this->createdAt = new \DateTime();
     }
 
     public function getId(): int

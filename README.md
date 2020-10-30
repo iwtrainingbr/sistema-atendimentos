@@ -12,7 +12,7 @@ Alterar o arquivo `/config/database.php`
 `php vendor/doctrine/orm/bin/doctrine.php orm:schema-tool:update --force`
 
 ## Criar usuário admin
-`php config/new-admin.php`
+`php config/generate-user.php`
 
 
 ## Executar / Subir o servidor

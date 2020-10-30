@@ -14,6 +14,9 @@ function mountRoute(string $controllerName, string $actionName): array
 
 return [
     '/' => mountRoute(IndexController::class, 'homeAction'),
+    '/login' => mountRoute(IndexController::class, 'loginAction'),
+    '/sair' => mountRoute(IndexController::class, 'logoutAction'),
+    '/dashboard' => mountRoute(IndexController::class, 'dashboardAction'),
     '/categorias' => mountRoute(CategoryController::class, 'listAction'),
     '/nova-categoria' => mountRoute(CategoryController::class, 'addAction'),
     '/categoria/excluir' => mountRoute(CategoryController::class, 'removeAction'),
@@ -23,4 +26,5 @@ return [
     '/agendamentos/novo' => mountRoute(SchedulingController::class, 'addAction'),
     '/agendamentos/finalizar' => mountRoute(SchedulingController::class, 'finishAction'),
     '/agendamentos/cancelar' => mountRoute(SchedulingController::class, 'cancelAction'),
+    '/agendamentos/detalhes' => mountRoute(SchedulingController::class, 'detailsAction'),
 ];
